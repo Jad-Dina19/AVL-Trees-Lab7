@@ -1,10 +1,3 @@
-from timeit import timeit
-import sys
-import random
-import matplotlib.pyplot as plt
-
-sys.setrecursionlimit(100000)
-
 class Node:
     def __init__(self, value):
         self.value = value
