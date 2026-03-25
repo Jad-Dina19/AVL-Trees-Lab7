@@ -90,7 +90,12 @@ class BST:
                 self.right_rotate()
             elif self.pivot.balance >= 1 and node.value > self.pivot.right.value:
                 self.left_rotate()
+            elif self.pivot.balance <= -1 and node.value > self.pivot.left.value:
+                self.lr_rotate()
+            elif self.pivot.balance >= 1 and node.value < self.pivot.right.value:
+                self.rl_rotate()
             
+
     
 
     def search(self, value, current=None):
@@ -163,7 +168,78 @@ class BST:
         self.update_balance(self.child)
 
         print("\nAfter left rotation:")
+        self.print_tree()
+
+    def lr_rotate(self):
+        print("\nBefore lr rotation:")
+        self.print_tree()
+
+        if self.pivot is None or self.pivot.left is None or self.pivot.left.right is None:
+            return
+
+        self.child = self.pivot.left
+        self.grandchild = self.child.right
+
+        # left rotation on child
+        self.child.right = self.grandchild.left
+        self.grandchild.left = self.child
+        self.pivot.left = self.grandchild
+
+        # right rotation on pivot
+        old_pivot = self.pivot
+        old_grandchild = self.grandchild
+
+        old_pivot.left = old_grandchild.right
+        old_grandchild.right = old_pivot
+
+        # reconnect to parent
+        if old_pivot == self.root:
+            self.root = old_grandchild
+        elif self.grandparent.left == old_pivot:
+            self.grandparent.left = old_grandchild
+            
+        self.update_balance(self.child)
+        self.update_balance(self.pivot)
+        self.update_balance(self.grandchild)
+
+        print("\nAfter lr rotation:")
+        self.print_tree()
+    
+    def rl_rotate(self):
+
+        print("\nBefore rl rotation:")
         self.print_tree() 
+
+        if(self.pivot is None or self.pivot.right is None):
+            return
+        
+        self.child = self.pivot.right
+        self.grandchild = self.child.left
+        
+        #right rotate on child
+        self.child.left = self.grandchild.right
+        self.pivot.right = self.grandchild
+        self.grandchild.right = self.child
+
+        #left rotate on pivot
+        old_pivot = self.pivot
+        old_grandchild = self.grandchild
+
+        old_pivot.right = old_grandchild.left
+        old_grandchild.left = old_pivot
+
+        if(self.pivot == self.root):
+            self.root = self.grandchild
+        elif(self.grandparent.left == old_pivot):
+            self.grandparent = self.grandchild
+            
+        self.update_balance(self.child)
+        self.update_balance(self.pivot)
+        self.update_balance(self.grandchild)
+
+        print("\nAfter rl rotation:")
+        self.print_tree() 
+
 
 def run_test(values, name):
     print(f"\n{name}")
@@ -178,8 +254,11 @@ def test_cases():
     test3 = [50, 25, 75, 10, 60, 5]
     test4 = [40, 20, 60, 10, 50, 5]
 
-    test5 = [1, 2, 4, 3, 5, 6]   # Case 3a on insert 5
-    test6 = [30, 20, 40, 10, 15]  # Case 3b on insert 15
+    test5 = [1, 2, 4, 3, 5, 6]      
+    test6 = [30, 20, 40, 10, 15]   
+
+    test7 = [20, 10, 40, 30, 50, 25, 35]  
+    test8 = [40, 20, 50, 10, 30, 25, 35]   
 
     run_test(test1, "Test Case 1")
     run_test(test2, "Test Case 2")
@@ -187,6 +266,8 @@ def test_cases():
     run_test(test4, "Test Case 4")
     run_test(test5, "Test Case 5 - Case 3a")
     run_test(test6, "Test Case 6 - Case 3b")
+    run_test(test7, "Test Case 7 - Case 3b")
+    run_test(test8, "Test Case 8 - Case 3b")
 
 def main():
     test_cases()
