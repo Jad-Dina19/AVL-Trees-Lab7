@@ -12,7 +12,7 @@ class BST:
         self.pivot = None
         self.grandparent = None
         self.child = None
-        self. grandchild = None
+        self.grandchild = None
 
     def height(self, current):
         if current is None:
@@ -117,8 +117,8 @@ class BST:
     
     def right_rotate(self):
 
-        print("\nBefore right rotation:")
-        self.print_tree()
+        # print("\nBefore right rotation:")
+        # self.print_tree()
 
         if(self.pivot is None or self.pivot.left is None):
             return
@@ -136,13 +136,13 @@ class BST:
         self.update_balance(self.pivot)
         self.update_balance(self.child)
 
-        print("\nAfter right rotation:")
-        self.print_tree()
+        # print("\nAfter right rotation:")
+        # self.print_tree()
     
     def left_rotate(self):
 
-        print("\nBefore left rotation:")
-        self.print_tree()
+        # print("\nBefore left rotation:")
+        # self.print_tree()
 
         if(self.pivot is None or self.pivot.right is None):
             return
@@ -162,8 +162,8 @@ class BST:
         self.update_balance(self.pivot)
         self.update_balance(self.child)
 
-        print("\nAfter left rotation:")
-        self.print_tree() 
+        # print("\nAfter left rotation:")
+        # self.print_tree() 
 
 def run_test(values, name):
     print(f"\n{name}")

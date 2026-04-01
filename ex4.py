@@ -12,7 +12,7 @@ class BST:
         self.pivot = None
         self.grandparent = None
         self.child = None
-        self. grandchild = None
+        self.grandchild = None
 
     def height(self, current):
         if current is None:
@@ -65,12 +65,12 @@ class BST:
                     if(self.pivot.left.value >= node.value):
                         print("Case 3a: adding a node to an outside subtree")
                     elif(self.pivot.left.value < node.value):
-                        print("Case 3b not supported")
+                        print("Case 3b: adding a node to an inside subtree (lr rotation)")
                 elif(self.pivot.balance > 0 and node.value > self.pivot.value):
                     if(self.pivot.right.value < node.value):
                         print("Case 3a: adding a node to an outside subtree")
                     elif(self.pivot.right.value >= node.value):
-                        print("Case 3b: not supported")
+                        print("Case 3b: adding a node to an inside subtree (rl rotation)")
                          
         if node.value <= current.value:
             if current.left is None:
@@ -122,8 +122,8 @@ class BST:
     
     def right_rotate(self):
 
-        print("\nBefore right rotation:")
-        self.print_tree()
+        # print("\nBefore right rotation:")
+        # self.print_tree()
 
         if(self.pivot is None or self.pivot.left is None):
             return
@@ -141,13 +141,13 @@ class BST:
         self.update_balance(self.pivot)
         self.update_balance(self.child)
 
-        print("\nAfter right rotation:")
-        self.print_tree()
+        # print("\nAfter right rotation:")
+        # self.print_tree()
     
     def left_rotate(self):
 
-        print("\nBefore left rotation:")
-        self.print_tree()
+        # print("\nBefore left rotation:")
+        # self.print_tree()
 
         if(self.pivot is None or self.pivot.right is None):
             return
@@ -167,12 +167,12 @@ class BST:
         self.update_balance(self.pivot)
         self.update_balance(self.child)
 
-        print("\nAfter left rotation:")
-        self.print_tree()
+        # print("\nAfter left rotation:")
+        # self.print_tree()
 
     def lr_rotate(self):
-        print("\nBefore lr rotation:")
-        self.print_tree()
+        # print("\nBefore lr rotation:")
+        # self.print_tree()
 
         if self.pivot is None or self.pivot.left is None or self.pivot.left.right is None:
             return
@@ -202,13 +202,13 @@ class BST:
         self.update_balance(self.pivot)
         self.update_balance(self.grandchild)
 
-        print("\nAfter lr rotation:")
-        self.print_tree()
+        # print("\nAfter lr rotation:")
+        # self.print_tree()
     
     def rl_rotate(self):
 
-        print("\nBefore rl rotation:")
-        self.print_tree() 
+        # print("\nBefore rl rotation:")
+        # self.print_tree() 
 
         if(self.pivot is None or self.pivot.right is None):
             return
@@ -237,8 +237,8 @@ class BST:
         self.update_balance(self.pivot)
         self.update_balance(self.grandchild)
 
-        print("\nAfter rl rotation:")
-        self.print_tree() 
+        # print("\nAfter rl rotation:")
+        # self.print_tree() 
 
 
 def run_test(values, name):
